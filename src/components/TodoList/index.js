@@ -3,7 +3,7 @@ import TodoListItem from '../TodoListItem';
 import { List, Typography } from 'mdc-react';
 import './index.scss';
 
-export default function TodoList({ list, todos }){
+export default function TodoList({ list, todos, onDelete }){
 
     return(
         <div className = 'todo-list'>
@@ -12,7 +12,8 @@ export default function TodoList({ list, todos }){
                 {todos.map(todo => 
                     <TodoListItem 
                         key = {todo.id}
-                        todo = {todo} ></TodoListItem>
+                        todo = {todo}
+                        onDelete = {onDelete} ></TodoListItem>
                 )}
             </List>
         </div>

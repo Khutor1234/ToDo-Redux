@@ -25,13 +25,20 @@ export default function TodoListPage({match}){
         }).then(todo => setTodos([...todos, todo]))
     }
 
+    function handleDelete(todoId){
+        db.deleteTodo(todoId).then(todoId => {
+            setTodos([...todos.filter(t => t.id !== todoId)])
+        })
+    }
+
     if(!list || !todos) return <Spinner/>
 
     return(
         <div id = 'todo-list-page' className = "pages">
             <TodoList 
                 list = {list}
-                todos = {todos} />
+                todos = {todos}
+                onDelete = {handleDelete} />
 
             <TododForm
                 onSubmit = {handleSubmit} />

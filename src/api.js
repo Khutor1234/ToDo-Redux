@@ -37,8 +37,14 @@ export function createTodo(data){
 			...data,
 			completed: false
 		})
-		.then(docRef => {
-			console.log(docRef);
-			return docRef
-		})  
+		.then(docRef => docRef.get())  
+		.then(doc => ({
+			id: doc.id,
+			...doc(data)
+		}))
+}
+
+export function deleteTodo(todoId){
+	return db.collection('todos').doc(todoId).delete()
+		.then(() => todoId)
 }
