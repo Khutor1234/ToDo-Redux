@@ -11,16 +11,15 @@ import { get } from './api';
 
 export default function App() {
 	const [lists, setLists] = useState([]);
-	const [todos, setTodos] = useState([])
+	
 
 
 	useEffect(() => {
-		get('lists').then(setLists);
-		get('todos').then(setTodos)
+		get('lists')().then(setLists);
 	}, [])
 
 	return (
-		<DBContext.Provider value ={{lists, todos}}>
+		<DBContext.Provider value ={{lists, get}}>
 			<div className = 'app'>
 				<AppDrawer lists = {lists}></AppDrawer>
 				<AppContent>
