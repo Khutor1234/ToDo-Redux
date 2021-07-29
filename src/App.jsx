@@ -3,11 +3,11 @@ import './App.scss';
 import AppDrawer from './components/AppDrawer';
 import AppContent from './components/AppContent';
 import { Switch, Route } from 'react-router-dom';
-import TodoList from './components/TodoList';
-import DBContext from './components/context/db';
+import TodoList from './pages/TodoList';
+import DBContext from './context/db';
 
 
-import { get } from './api';
+import * as api from './api';
 
 export default function App() {
 	const [lists, setLists] = useState([]);
@@ -15,11 +15,11 @@ export default function App() {
 
 
 	useEffect(() => {
-		get('lists')().then(setLists);
+		api.getLists().then(setLists);
 	}, [])
 
 	return (
-		<DBContext.Provider value ={{lists, get}}>
+		<DBContext.Provider value ={{lists, ...api}}>
 			<div className = 'app'>
 				<AppDrawer lists = {lists}></AppDrawer>
 				<AppContent>
